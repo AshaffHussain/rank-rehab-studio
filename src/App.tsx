@@ -11,6 +11,7 @@ import RankingRecovery from "./pages/RankingRecovery";
 import ContentOpportunities from "./pages/ContentOpportunities";
 import Settings from "./pages/Settings";
 import URLPerformance from "./pages/URLPerformance";
+import ContentEditor from "./pages/ContentEditor";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/content-opportunities" element={<ContentOpportunities />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/url-performance/*" element={<URLPerformance />} />
+            <Route path="/content-editor/:topicId" element={<ContentEditor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
               </main>
