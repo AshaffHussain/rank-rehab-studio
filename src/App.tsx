@@ -9,6 +9,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import Dashboard from "./pages/Dashboard";
 import RankingRecovery from "./pages/RankingRecovery";
 import ContentOpportunities from "./pages/ContentOpportunities";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/ranking-recovery" element={<RankingRecovery />} />
                   <Route path="/content-opportunities" element={<ContentOpportunities />} />
+                  <Route path="/settings" element={<Settings />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

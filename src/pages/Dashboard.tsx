@@ -2,16 +2,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, DollarSign, MousePointer, Eye, Target, BarChart3, Minus } from "lucide-react";
+import { KPICard } from "@/components/dashboard/KPICard";
 
 const kpiData = [
-  { title: "Revenue", value: "$48,200", change: "+12%", trend: "up", icon: DollarSign },
-  { title: "RPC", value: "$0.55", change: "+4%", trend: "up", icon: Target },
-  { title: "Sessions", value: "182,000", change: "+7%", trend: "up", icon: BarChart3 },
-  { title: "Clicks", value: "89,500", change: "+6%", trend: "up", icon: MousePointer },
-  { title: "Impressions", value: "1.2M", change: "+9%", trend: "up", icon: Eye },
-  { title: "CTR", value: "7.4%", change: "flat", trend: "flat", icon: Target },
-  { title: "Avg Position", value: "5.6", change: "−0.3", trend: "down", icon: BarChart3 },
-];
+  { title: "Revenue", value: "$48,200", change: "+12%", trend: "up", icon: DollarSign, chartData: [42000, 44000, 43000, 46000, 48200] },
+  { title: "RPC", value: "$0.55", change: "+4%", trend: "up", icon: Target, chartData: [0.52, 0.53, 0.54, 0.55, 0.55] },
+  { title: "Sessions", value: "182,000", change: "+7%", trend: "up", icon: BarChart3, chartData: [170000, 175000, 178000, 180000, 182000] },
+  { title: "Clicks", value: "89,500", change: "+6%", trend: "up", icon: MousePointer, chartData: [84000, 86000, 87500, 89000, 89500] },
+  { title: "Impressions", value: "1.2M", change: "+9%", trend: "up", icon: Eye, chartData: [1100000, 1150000, 1180000, 1200000, 1200000] },
+  { title: "CTR", value: "7.4%", change: "flat", trend: "flat", icon: Target, chartData: [7.4, 7.3, 7.4, 7.5, 7.4] },
+  { title: "Avg Position", value: "5.6", change: "−0.3", trend: "down", icon: BarChart3, chartData: [5.3, 5.4, 5.5, 5.8, 5.6] },
+] as const;
 
 const topBlogUrls = [
   {
@@ -111,26 +112,17 @@ const Dashboard = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {kpiData.map((kpi) => {
-          const Icon = kpi.icon;
-          return (
-            <Card key={kpi.title} className="hover:shadow-md transition-shadow">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {kpi.title}
-                </CardTitle>
-                <Icon className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{kpi.value}</div>
-                <div className={`text-xs flex items-center gap-1 ${getTrendColor(kpi.trend)}`}>
-                  {getTrendIcon(kpi.trend)}
-                  {kpi.change} vs prev
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+        {kpiData.map((kpi) => (
+          <KPICard
+            key={kpi.title}
+            title={kpi.title}
+            value={kpi.value}
+            change={kpi.change}
+            trend={kpi.trend}
+            icon={kpi.icon}
+            chartData={kpi.chartData}
+          />
+        ))}
       </div>
 
       {/* Top Blog URLs */}

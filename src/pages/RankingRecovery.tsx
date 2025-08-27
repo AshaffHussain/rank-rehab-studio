@@ -42,13 +42,33 @@ const cannibalizationData = {
 const changeLogData = [
   {
     date: "2025-07-01",
+    time: "14:32",
+    article: "/blog/reverse-image-search-guide",
     change: "Updated H1 and meta description",
-    url: "/blog/reverse-image-search-guide"
+    revenueChange: "+$2,400",
+    ctrChange: "+0.8%",
+    positionChange: "+2",
+    timeFrame: "7 days"
   },
   {
-    date: "2025-03-15",
+    date: "2025-03-15", 
+    time: "09:15",
+    article: "/blog/reverse-image-search-guide",
     change: "Added internal links to 'spot-romance-scams'",
-    url: "/blog/reverse-image-search-guide"
+    revenueChange: "+$1,850",
+    ctrChange: "+0.4%",
+    positionChange: "+1",
+    timeFrame: "14 days"
+  },
+  {
+    date: "2025-02-28",
+    time: "16:45", 
+    article: "/blog/spot-romance-scams",
+    change: "Refreshed statistics and examples",
+    revenueChange: "+$3,200",
+    ctrChange: "+1.2%",
+    positionChange: "+3",
+    timeFrame: "7 days"
   }
 ];
 
@@ -116,62 +136,6 @@ const RankingRecovery = () => {
         </CardContent>
       </Card>
 
-      {/* Cannibalization Report */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Cannibalization Report</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Keyword: <span className="font-medium text-primary">"{cannibalizationData.keyword}"</span>
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>URL</TableHead>
-                  <TableHead>Position</TableHead>
-                  <TableHead>CTR</TableHead>
-                  <TableHead>Clicks</TableHead>
-                  <TableHead>RPC</TableHead>
-                  <TableHead>Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {cannibalizationData.urls.map((url, index) => (
-                  <TableRow key={index} className="hover:bg-muted/50">
-                    <TableCell className="font-medium">
-                      <span className="text-primary hover:underline cursor-pointer">
-                        {url.url}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={url.position <= 5 ? "default" : "secondary"}>
-                        {url.position}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{url.ctr}</TableCell>
-                    <TableCell>{url.clicks}</TableCell>
-                    <TableCell className="font-semibold">{url.rpc}</TableCell>
-                    <TableCell>
-                      {url.isPrimary ? (
-                        <Badge variant="default">Primary</Badge>
-                      ) : (
-                        <Badge variant="secondary">Competing</Badge>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <div className="mt-4 p-4 bg-accent rounded-lg">
-            <p className="text-sm text-accent-foreground">
-              <strong>Suggested Primary:</strong> /blog/reverse-image-search-guide
-            </p>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Article Detail Preview */}
       <Card>
@@ -193,21 +157,56 @@ const RankingRecovery = () => {
       {/* Change Log */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Changes</CardTitle>
+          <CardTitle>Recent Changes & Impact</CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Track content updates and their performance impact
+          </p>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {changeLogData.map((entry, index) => (
-              <div key={index} className="flex items-start gap-4 p-3 border rounded-lg">
-                <div className="text-sm text-muted-foreground font-mono min-w-24">
-                  {entry.date}
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm">{entry.change}</p>
-                  <p className="text-xs text-muted-foreground">{entry.url}</p>
-                </div>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Date & Time</TableHead>
+                  <TableHead>Article</TableHead>
+                  <TableHead>Change</TableHead>
+                  <TableHead>Revenue Impact</TableHead>
+                  <TableHead>CTR Impact</TableHead>
+                  <TableHead>Position Impact</TableHead>
+                  <TableHead>Time Frame</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {changeLogData.map((entry, index) => (
+                  <TableRow key={index} className="hover:bg-muted/50">
+                    <TableCell className="font-mono text-sm">
+                      <div>{entry.date}</div>
+                      <div className="text-xs text-muted-foreground">{entry.time}</div>
+                    </TableCell>
+                    <TableCell className="font-medium max-w-xs">
+                      <span className="text-primary hover:underline cursor-pointer">
+                        {entry.article}
+                      </span>
+                    </TableCell>
+                    <TableCell className="max-w-sm">
+                      {entry.change}
+                    </TableCell>
+                    <TableCell className="font-semibold text-success">
+                      {entry.revenueChange}
+                    </TableCell>
+                    <TableCell className="font-semibold text-success">
+                      {entry.ctrChange}
+                    </TableCell>
+                    <TableCell className="font-semibold text-success">
+                      {entry.positionChange}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{entry.timeFrame}</Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </CardContent>
       </Card>

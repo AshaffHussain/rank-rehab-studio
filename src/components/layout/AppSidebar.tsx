@@ -1,4 +1,4 @@
-import { BarChart3, Target, TrendingUp, Calendar, Filter, Globe } from "lucide-react";
+import { BarChart3, Target, TrendingUp, Settings, Calendar, Filter, Globe } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 
 import {
@@ -17,6 +17,7 @@ const navigationItems = [
   { title: "Dashboard", url: "/", icon: BarChart3 },
   { title: "Ranking Recovery", url: "/ranking-recovery", icon: Target },
   { title: "Content Opportunities", url: "/content-opportunities", icon: TrendingUp },
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
