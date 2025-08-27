@@ -7,12 +7,18 @@ import { AlertTriangle, TrendingDown, Clock, DollarSign, ExternalLink } from "lu
 const diagnosticsData = [
   {
     url: "/blog/reverse-image-search-guide",
-    issues: ["CTR Drop", "Position Drop"],
+    issues: [
+      { name: "CTR Drop", percentage: "-23%" },
+      { name: "Position Drop", percentage: "-18%" }
+    ],
     severity: "high"
   },
   {
     url: "/blog/background-check-vs-people-search",
-    issues: ["Outdated (210 days)", "Revenue Drop"],
+    issues: [
+      { name: "Outdated (210 days)", percentage: "" },
+      { name: "Revenue Drop", percentage: "-31%" }
+    ],
     severity: "medium"
   }
 ];
@@ -120,8 +126,9 @@ const RankingRecovery = () => {
                     <div className="flex gap-2">
                       {item.issues.map((issue, idx) => (
                         <Badge key={idx} variant={getSeverityColor(item.severity)} className="flex items-center gap-1">
-                          {getIssueIcon(issue)}
-                          {issue}
+                          {getIssueIcon(issue.name)}
+                          {issue.name}
+                          {issue.percentage && <span className="ml-1 font-semibold">{issue.percentage}</span>}
                         </Badge>
                       ))}
                     </div>
@@ -137,22 +144,6 @@ const RankingRecovery = () => {
       </Card>
 
 
-      {/* Article Detail Preview */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <DollarSign className="h-5 w-5 text-success" />
-            Article Detail: /blog/reverse-image-search-guide
-          </CardTitle>
-          <div className="text-2xl font-bold text-success">$12,850</div>
-          <p className="text-sm text-muted-foreground">Revenue (last 30 days)</p>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            Click "View Details" on any URL above to see the full keyword performance table and detailed analytics.
-          </p>
-        </CardContent>
-      </Card>
 
       {/* Change Log */}
       <Card>
@@ -184,9 +175,9 @@ const RankingRecovery = () => {
                       <div className="text-xs text-muted-foreground">{entry.time}</div>
                     </TableCell>
                     <TableCell className="font-medium max-w-xs">
-                      <span className="text-primary hover:underline cursor-pointer">
+                      <a href={`/url-performance${entry.article}`} className="text-primary hover:underline cursor-pointer">
                         {entry.article}
-                      </span>
+                      </a>
                     </TableCell>
                     <TableCell className="max-w-sm">
                       {entry.change}

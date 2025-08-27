@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import RankingRecovery from "./pages/RankingRecovery";
 import ContentOpportunities from "./pages/ContentOpportunities";
 import Settings from "./pages/Settings";
+import URLPerformance from "./pages/URLPerformance";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,13 +27,14 @@ const App = () => (
             <div className="flex-1 flex flex-col">
               <TopBar />
               <main className="flex-1 p-6">
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/ranking-recovery" element={<RankingRecovery />} />
-                  <Route path="/content-opportunities" element={<ContentOpportunities />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/ranking-recovery" element={<RankingRecovery />} />
+            <Route path="/content-opportunities" element={<ContentOpportunities />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/url-performance/*" element={<URLPerformance />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
               </main>
             </div>
           </div>
